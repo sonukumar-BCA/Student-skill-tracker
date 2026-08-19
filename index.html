@@ -397,11 +397,105 @@ function searchProducts() {
 
 </script>
 
-<!-- ================= END PART 2 ================= -->
-        <!-- Dashboard Cards -->
+
+  <!-- ================= PART 3 : STOCK MANAGEMENT ================= -->
+
+<div class="section" id="stockSection">
+
+    <div style="display:flex; justify-content:space-between; align-items:center; gap:15px; flex-wrap:wrap;">
+        <h2>📊 Stock Management</h2>
+
+        <button onclick="checkStock()"
+            style="background:#2563eb; color:white; border:none; padding:11px 18px; border-radius:8px; cursor:pointer;">
+            🔄 Check Stock
+        </button>
+    </div>
+
+    <div style="margin-top:20px; overflow-x:auto;">
+
+        <table id="stockTable">
+
+            <tr>
+                <th>Product</th>
+                <th>Category</th>
+                <th>Current Stock</th>
+                <th>Minimum Stock</th>
+                <th>Status</th>
+            </tr>
+
+            <tr>
+                <td>Rice 5 KG</td>
+                <td>Grocery</td>
+                <td>4</td>
+                <td>10</td>
+                <td class="low">⚠️ Low Stock</td>
+            </tr>
+
+            <tr>
+                <td>Cooking Oil</td>
+                <td>Grocery</td>
+                <td>3</td>
+                <td>10</td>
+                <td class="low">⚠️ Low Stock</td>
+            </tr>
+
+            <tr>
+                <td>Soap</td>
+                <td>Personal Care</td>
+                <td>25</td>
+                <td>10</td>
+                <td class="available">✓ Available</td>
+            </tr>
+
+            <tr>
+                <td>Biscuits</td>
+                <td>Grocery</td>
+                <td>40</td>
+                <td>10</td>
+                <td class="available">✓ Available</td>
+            </tr>
+
+        </table>
+
+    </div>
+
+</div>
+
+<script>
+
+function checkStock() {
+
+    let table = document.getElementById("stockTable");
+    let rows = table.getElementsByTagName("tr");
+
+    for (let i = 1; i < rows.length; i++) {
+
+        let cells = rows[i].getElementsByTagName("td");
+
+        let currentStock = parseInt(cells[2].innerText);
+        let minimumStock = parseInt(cells[3].innerText);
+
+        if (currentStock <= minimumStock) {
+
+            cells[4].innerHTML =
+                '<span class="low">⚠️ Low Stock</span>';
+
+        } else {
+
+            cells[4].innerHTML =
+                '<span class="available">✓ Available</span>';
+        }
+    }
+
+    alert("Stock status updated successfully!");
+
+}
+
+</script>
+
         <div class="cards">
 
-            <div class="card">
+        
                 <h3>Total Products</h3>
                 <p>250</p>
             </div>
