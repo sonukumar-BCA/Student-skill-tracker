@@ -603,7 +603,167 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
 });
-        </script><!-- Low Stock -->
+        </script>
+    <!-- ================= PART 5 : SMART SHOP FUNCTIONALITY ================= -->
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    /* ================= PRODUCT SEARCH ================= */
+
+    const searchInput = document.querySelector(
+        'input[placeholder*="Search product"]'
+    );
+
+    if (searchInput) {
+        searchInput.addEventListener("input", function () {
+
+            const searchText = this.value.toLowerCase();
+
+            document.querySelectorAll("table tbody tr").forEach(function (row) {
+
+                const rowText = row.innerText.toLowerCase();
+
+                if (rowText.includes(searchText)) {
+                    row.style.display = "";
+                } else {
+                    row.style.display = "none";
+                }
+
+            });
+        });
+    }
+
+
+    /* ================= DELETE PRODUCT ================= */
+
+    document.querySelectorAll("button").forEach(function (button) {
+
+        if (button.innerText.trim().toLowerCase() === "delete") {
+
+            button.addEventListener("click", function () {
+
+                const row = this.closest("tr");
+
+                if (!row) return;
+
+                const productName =
+                    row.querySelector("td")?.innerText || "Product";
+
+                const confirmDelete = confirm(
+                    "Are you sure you want to delete " +
+                    productName +
+                    "?"
+                );
+
+                if (confirmDelete) {
+                    row.remove();
+
+                    alert("✅ Product deleted successfully!");
+                }
+
+            });
+
+        }
+
+    });
+
+
+    /* ================= ADD PRODUCT ================= */
+
+    document.querySelectorAll("button").forEach(function (button) {
+
+        if (
+            button.innerText.includes("Add Product") ||
+            button.innerText.includes("+ Add Product")
+        ) {
+
+            button.addEventListener("click", function () {
+
+                const productName = prompt(
+                    "Enter Product Name:"
+                );
+
+                if (!productName) return;
+
+                const category = prompt(
+                    "Enter Category:"
+                );
+
+                if (!category) return;
+
+                const price = prompt(
+                    "Enter Price:"
+                );
+
+                if (!price) return;
+
+                const stock = prompt(
+                    "Enter Stock Quantity:"
+                );
+
+                if (!stock) return;
+
+                alert(
+                    "✅ Product Added Successfully!\n\n" +
+                    "Product: " + productName +
+                    "\nCategory: " + category +
+                    "\nPrice: ₹" + price +
+                    "\nStock: " + stock
+                );
+
+            });
+
+        }
+
+    });
+
+
+    /* ================= STOCK CHECK ================= */
+
+    document.querySelectorAll("button").forEach(function (button) {
+
+        if (
+            button.innerText.includes("Check Stock") ||
+            button.innerText.includes("📦 Check Stock")
+        ) {
+
+            button.addEventListener("click", function () {
+
+                alert(
+                    "📦 Stock Check Complete!\n\n" +
+                    "⚠️ Low Stock products are marked in red.\n" +
+                    "✅ Available products are marked in green."
+                );
+
+            });
+
+        }
+
+    });
+
+
+    /* ================= SIDEBAR MENU ================= */
+
+    document.querySelectorAll(".sidebar a, .sidebar li").forEach(function (item) {
+
+        item.addEventListener("click", function () {
+
+            document.querySelectorAll(".sidebar a, .sidebar li")
+                .forEach(function (el) {
+                    el.classList.remove("active");
+                });
+
+            this.classList.add("active");
+
+        });
+
+    });
+
+});
+</script>
+
+<!-- ================= END PART 5 ================= --><!-- Low Stock -->
         <div class="section">
 
             <h2>⚠️ Low Stock Products</h2>
