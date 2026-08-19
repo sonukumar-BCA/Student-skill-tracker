@@ -207,7 +207,197 @@
             </div>
         </div>
 
+<!-- ================= PART 2 : PRODUCTS ================= -->
 
+<div class="section" id="productsSection">
+
+    <div style="display:flex; justify-content:space-between; align-items:center; gap:15px; flex-wrap:wrap;">
+        <h2>📦 Products Management</h2>
+
+        <button onclick="openProductForm()"
+            style="background:#2563eb; color:white; border:none; padding:12px 18px; border-radius:8px; cursor:pointer; font-weight:bold;">
+            + Add Product
+        </button>
+    </div>
+
+    <!-- Search -->
+    <input
+        type="text"
+        id="productSearch"
+        placeholder="🔍 Search product..."
+        onkeyup="searchProducts()"
+        style="width:100%; padding:13px; margin:18px 0; border:1px solid #ddd; border-radius:8px; outline:none;"
+    >
+
+    <!-- Product Form -->
+    <div id="productForm"
+        style="display:none; background:#f8fafc; padding:20px; border-radius:10px; margin-bottom:20px;">
+
+        <h3 style="margin-bottom:15px;">Add New Product</h3>
+
+        <input id="productName"
+            type="text"
+            placeholder="Product Name"
+            style="width:100%; padding:12px; margin-bottom:10px; border:1px solid #ddd; border-radius:7px;">
+
+        <input id="productCategory"
+            type="text"
+            placeholder="Category"
+            style="width:100%; padding:12px; margin-bottom:10px; border:1px solid #ddd; border-radius:7px;">
+
+        <input id="productPrice"
+            type="number"
+            placeholder="Price (₹)"
+            style="width:100%; padding:12px; margin-bottom:10px; border:1px solid #ddd; border-radius:7px;">
+
+        <input id="productStock"
+            type="number"
+            placeholder="Stock Quantity"
+            style="width:100%; padding:12px; margin-bottom:15px; border:1px solid #ddd; border-radius:7px;">
+
+        <button onclick="addProduct()"
+            style="background:#16a34a; color:white; border:none; padding:11px 18px; border-radius:7px; cursor:pointer;">
+            Save Product
+        </button>
+
+        <button onclick="closeProductForm()"
+            style="background:#dc2626; color:white; border:none; padding:11px 18px; border-radius:7px; cursor:pointer; margin-left:8px;">
+            Cancel
+        </button>
+
+    </div>
+
+    <!-- Products Table -->
+    <div style="overflow-x:auto;">
+
+        <table id="productsTable">
+
+            <tr>
+                <th>Product</th>
+                <th>Category</th>
+                <th>Price</th>
+                <th>Stock</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+
+            <tr>
+                <td>Rice 5 KG</td>
+                <td>Grocery</td>
+                <td>₹350</td>
+                <td>4</td>
+                <td class="low">Low Stock</td>
+                <td>
+                    <button onclick="deleteProduct(this)"
+                        style="background:#dc2626;color:white;border:none;padding:7px 10px;border-radius:5px;cursor:pointer;">
+                        Delete
+                    </button>
+                </td>
+            </tr>
+
+            <tr>
+                <td>Cooking Oil</td>
+                <td>Grocery</td>
+                <td>₹150</td>
+                <td>3</td>
+                <td class="low">Low Stock</td>
+                <td>
+                    <button onclick="deleteProduct(this)"
+                        style="background:#dc2626;color:white;border:none;padding:7px 10px;border-radius:5px;cursor:pointer;">
+                        Delete
+                    </button>
+                </td>
+            </tr>
+
+        </table>
+
+    </div>
+
+</div>
+
+
+<script>
+
+function openProductForm() {
+    document.getElementById("productForm").style.display = "block";
+}
+
+function closeProductForm() {
+    document.getElementById("productForm").style.display = "none";
+}
+
+function addProduct() {
+
+    let name = document.getElementById("productName").value;
+    let category = document.getElementById("productCategory").value;
+    let price = document.getElementById("productPrice").value;
+    let stock = document.getElementById("productStock").value;
+
+    if (name === "" || category === "" || price === "" || stock === "") {
+        alert("Please fill all product details.");
+        return;
+    }
+
+    let table = document.getElementById("productsTable");
+
+    let row = table.insertRow(-1);
+
+    let status = stock <= 5
+        ? '<span class="low">Low Stock</span>'
+        : '<span class="available">Available</span>';
+
+    row.innerHTML = `
+        <td>${name}</td>
+        <td>${category}</td>
+        <td>₹${price}</td>
+        <td>${stock}</td>
+        <td>${status}</td>
+        <td>
+            <button onclick="deleteProduct(this)"
+                style="background:#dc2626;color:white;border:none;padding:7px 10px;border-radius:5px;cursor:pointer;">
+                Delete
+            </button>
+        </td>
+    `;
+
+    document.getElementById("productName").value = "";
+    document.getElementById("productCategory").value = "";
+    document.getElementById("productPrice").value = "";
+    document.getElementById("productStock").value = "";
+
+    closeProductForm();
+
+    alert("Product added successfully!");
+}
+
+function deleteProduct(button) {
+
+    if (confirm("Are you sure you want to delete this product?")) {
+        button.parentElement.parentElement.remove();
+    }
+
+}
+
+function searchProducts() {
+
+    let input = document.getElementById("productSearch").value.toLowerCase();
+
+    let table = document.getElementById("productsTable");
+    let rows = table.getElementsByTagName("tr");
+
+    for (let i = 1; i < rows.length; i++) {
+
+        let text = rows[i].innerText.toLowerCase();
+
+        rows[i].style.display =
+            text.includes(input) ? "" : "none";
+    }
+
+}
+
+</script>
+
+<!-- ================= END PART 2 ================= -->
         <!-- Dashboard Cards -->
         <div class="cards">
 
@@ -234,7 +424,7 @@
         </div>
 
 
-        <!-- Recent Sales -->
+        
         <div class="section">
 
             <h2>Recent Sales</h2>
