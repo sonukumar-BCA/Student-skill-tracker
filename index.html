@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Shop Manager</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f4f6f9;
+            color: #222;
+        }
+
+        .sidebar {
+            width: 240px;
+            height: 100vh;
+            background: #172554;
+            color: white;
+            position: fixed;
+            left: 0;
+            top: 0;
+            padding: 25px 15px;
+        }
+
+        .logo {
+            text-align: center;
+            font-size: 23px;
+            font-weight: bold;
+            margin-bottom: 35px;
+        }
+
+        .menu a {
+            display: block;
+            color: white;
+            text-decoration: none;
+            padding: 14px;
+            margin: 7px 0;
+            border-radius: 8px;
+        }
+
+        .menu a:hover {
+            background: #2563eb;
+        }
+
+        .main {
+            margin-left: 240px;
+            padding: 25px;
+        }
+
+        .topbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .topbar h1 {
+            font-size: 28px;
+        }
+
+        .admin {
+            background: white;
+            padding: 10px 18px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px #ddd;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .card {
+            background: white;
+            padding: 22px;
+            border-radius: 12px;
+            box-shadow: 0 3px 10px #ddd;
+        }
+
+        .card h3 {
+            color: #555;
+            font-size: 16px;
+        }
+
+        .card p {
+            font-size: 28px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .section {
+            margin-top: 30px;
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 3px 10px #ddd;
+        }
+
+        .section h2 {
+            margin-bottom: 18px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 14px;
+            border-bottom: 1px solid #ddd;
+            text-align: left;
+        }
+
+        th {
+            background: #f1f5f9;
+        }
+
+        .low {
+            color: red;
+            font-weight: bold;
+        }
+
+        .available {
+            color: green;
+            font-weight: bold;
+        }
+
+        @media (max-width: 900px) {
+            .sidebar {
+                width: 190px;
+            }
+
+            .main {
+                margin-left: 190px;
+            }
+
+            .cards {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .sidebar {
+                position: relative;
+                width: 100%;
+                height: auto;
+            }
+
+            .main {
+                margin-left: 0;
+            }
+
+            .cards {
+                grid-template-columns: 1fr;
+            }
+
+            .topbar {
+                display: block;
+            }
+
+            .admin {
+                margin-top: 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+
+        <div class="logo">
+            🛒 Smart Shop
+        </div>
+
+        <div class="menu">
+            <a href="#">🏠 Dashboard</a>
+            <a href="#">📦 Products</a>
+            <a href="#">📊 Stock</a>
+            <a href="#">👥 Customers</a>
+            <a href="#">🧾 Billing</a>
+            <a href="#">💰 Sales</a>
+            <a href="#">📈 Reports</a>
+            <a href="#">⚙️ Settings</a>
+        </div>
+
+    </div>
+
+
+    <!-- Main Content -->
+    <div class="main">
+
+        <div class="topbar">
+            <h1>Dashboard</h1>
+
+            <div class="admin">
+                👤 Admin
+            </div>
+        </div>
+
+
+        <!-- Dashboard Cards -->
+        <div class="cards">
+
+            <div class="card">
+                <h3>Total Products</h3>
+                <p>250</p>
+            </div>
+
+            <div class="card">
+                <h3>Total Customers</h3>
+                <p>125</p>
+            </div>
+
+            <div class="card">
+                <h3>Today's Sales</h3>
+                <p>₹8,450</p>
+            </div>
+
+            <div class="card">
+                <h3>Low Stock</h3>
+                <p>12</p>
+            </div>
+
+        </div>
+
+
+        <!-- Recent Sales -->
+        <div class="section">
+
+            <h2>Recent Sales</h2>
+
+            <table>
+
+                <tr>
+                    <th>Bill No.</th>
+                    <th>Customer</th>
+                    <th>Amount</th>
+                    <th>Status</th>
+                </tr>
+
+                <tr>
+                    <td>#1001</td>
+                    <td>Rahul</td>
+                    <td>₹1,250</td>
+                    <td class="available">Paid</td>
+                </tr>
+
+                <tr>
+                    <td>#1002</td>
+                    <td>Amit</td>
+                    <td>₹850</td>
+                    <td class="available">Paid</td>
+                </tr>
+
+                <tr>
+                    <td>#1003</td>
+                    <td>Vikas</td>
+                    <td>₹2,100</td>
+                    <td class="available">Paid</td>
+                </tr>
+
+            </table>
+
+        </div>
+
+
+        <!-- Low Stock -->
+        <div class="section">
+
+            <h2>⚠️ Low Stock Products</h2>
+
+            <table>
+
+                <tr>
+                    <th>Product</th>
+                    <th>Category</th>
+                    <th>Available</th>
+                    <th>Status</th>
+                </tr>
+
+                <tr>
+                    <td>Rice 5 KG</td>
+                    <td>Grocery</td>
+                    <td>4</td>
+                    <td class="low">Low Stock</td>
+                </tr>
+
+                <tr>
+                    <td>Cooking Oil</td>
+                    <td>Grocery</td>
+                    <td>3</td>
+                    <td class="low">Low Stock</td>
+                </tr>
+
+                <tr>
+                    <td>Soap</td>
+                    <td>Personal Care</td>
+                    <td>5</td>
+                    <td class="low">Low Stock</td>
+                </tr>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</body>
+                      </html>
