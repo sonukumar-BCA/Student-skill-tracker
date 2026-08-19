@@ -175,7 +175,146 @@
 
 <body>
 
-    <!-- Sidebar -->
+    <!-<!-- ================= PART 6 : BILLING & SALES ================= -->
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    /* ================= BILLING ================= */
+
+    const billingItems = [];
+
+    function createBill() {
+
+        const customerName = prompt("Enter Customer Name:");
+
+        if (!customerName) return;
+
+        const productName = prompt("Enter Product Name:");
+
+        if (!productName) return;
+
+        const quantity = parseInt(
+            prompt("Enter Quantity:")
+        );
+
+        if (!quantity || quantity <= 0) {
+            alert("⚠️ Please enter a valid quantity.");
+            return;
+        }
+
+        const price = parseFloat(
+            prompt("Enter Product Price:")
+        );
+
+        if (!price || price <= 0) {
+            alert("⚠️ Please enter a valid price.");
+            return;
+        }
+
+        const total = quantity * price;
+
+        billingItems.push({
+            customer: customerName,
+            product: productName,
+            quantity: quantity,
+            price: price,
+            total: total
+        });
+
+        alert(
+            "✅ Bill Created Successfully!\n\n" +
+            "Customer: " + customerName +
+            "\nProduct: " + productName +
+            "\nQuantity: " + quantity +
+            "\nPrice: ₹" + price +
+            "\nTotal: ₹" + total
+        );
+
+        addSaleToTable(
+            customerName,
+            total
+        );
+    }
+
+
+    /* ================= ADD SALE ================= */
+
+    function addSaleToTable(customer, amount) {
+
+        const tables = document.querySelectorAll("table");
+
+        if (tables.length === 0) return;
+
+        const salesTable =
+            tables[tables.length - 1];
+
+        const tbody =
+            salesTable.querySelector("tbody");
+
+        if (!tbody) return;
+
+        const row =
+            document.createElement("tr");
+
+        row.innerHTML =
+            "<td>" + customer + "</td>" +
+            "<td>₹" + amount.toLocaleString("en-IN") + "</td>" +
+            "<td style='color:green;font-weight:bold;'>Paid</td>";
+
+        tbody.appendChild(row);
+    }
+
+
+    /* ================= BILLING BUTTON ================= */
+
+    document.querySelectorAll("button").forEach(function (button) {
+
+        const text =
+            button.innerText.trim().toLowerCase();
+
+        if (
+            text.includes("billing") ||
+            text.includes("create bill") ||
+            text.includes("new bill")
+        ) {
+
+            button.addEventListener(
+                "click",
+                createBill
+            );
+        }
+
+    });
+
+
+    /* ================= SALES BUTTON ================= */
+
+    document.querySelectorAll("button").forEach(function (button) {
+
+        const text =
+            button.innerText.trim().toLowerCase();
+
+        if (text.includes("sales")) {
+
+            button.addEventListener("click", function () {
+
+                alert(
+                    "💰 Sales Management\n\n" +
+                    "Total Bills: " +
+                    billingItems.length
+                );
+
+            });
+
+        }
+
+    });
+
+});
+</script>
+
+<!-- ================= END PART 6 ================= -->- Sidebar -->
     <div class="sidebar">
 
         <div class="logo">
