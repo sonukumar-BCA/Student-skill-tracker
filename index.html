@@ -558,7 +558,52 @@ function checkStock() {
         </div>
 
 
-        <!-- Low Stock -->
+        <script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    const form = document.getElementById("admissionForm");
+
+    if (!form) return;
+
+    form.addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        const name = document.getElementById("name").value.trim();
+        const email = document.getElementById("email").value.trim();
+        const phone = document.getElementById("phone").value.trim();
+        const city = document.getElementById("city").value;
+        const course = document.getElementById("course").value;
+
+        if (
+            name === "" ||
+            email === "" ||
+            phone === "" ||
+            city === "" ||
+            course === ""
+        ) {
+            alert("⚠️ Please fill all the required fields.");
+            return;
+        }
+
+        if (!/^[0-9]{10}$/.test(phone)) {
+            alert("⚠️ Please enter a valid 10-digit mobile number.");
+            return;
+        }
+
+        alert(
+            "✅ Admission Form Submitted Successfully!\n\n" +
+            "Name: " + name + "\n" +
+            "Email: " + email + "\n" +
+            "Mobile: " + phone + "\n" +
+            "City: " + city + "\n" +
+            "Course: " + course
+        );
+
+        form.reset();
+    });
+
+});
+        </script><!-- Low Stock -->
         <div class="section">
 
             <h2>⚠️ Low Stock Products</h2>
